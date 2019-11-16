@@ -1,0 +1,30 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2017",
+    "lib": ["esnext"],
+    "moduleResolution": "node",
+    "inlineSources": true,
+    "inlineSourceMap": true,
+    "declaration": false,
+    "outDir": "lib",
+    "typeRoots": ["node_modules/@types"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "typeAcquisition": {
+    "enable": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "**/lib",
+    "**/*.spec.ts",
+    "node_modules"
+  ]
+}

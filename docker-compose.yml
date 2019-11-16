@@ -1,0 +1,54 @@
+version: '3'
+services:
+  my-miner:
+    image: jdforsythe/bloch:v0.1.0
+    ports:
+      - 8080:8080
+    networks:
+      - mining_network
+    environment:
+      P2P_PORT: 9990
+      MINER_PUB_KEY: 046acf12468cb92de2e7bf7442987d73c183719454ccd91e42c5785437954c97418ec6fa979c63e82f4dd794db28f86f41ac81275603dbad9f99ac06d5046c133a
+      MINER_PRIV_KEY: 91ec73d00e1c127d0586dc0d6915495cf7f2b44243d1cac15e46b4431c6bfbf6
+      MAX_USELESS_ITERATIONS: 500
+      MAX_PEERS: 5
+      HTTP_HOST: 0.0.0.0
+      HTTP_PORT: 8080
+
+  miner-one:
+    image: jdforsythe/bloch:v0.1.0
+    ports:
+      - 8081:8080
+    depends_on:
+      - my-miner
+    networks:
+      - mining_network
+    environment:
+      P2P_PORT: 9990
+      MINER_PUB_KEY: 04b7f6906a3f2beba46a838e2b3d5a716801b641b2c36814e85a1abb8634561a7731305d8cb608702fa972a0e8b40fc31c2f37a01139a675cdf9d3191ee4202dd0
+      MINER_PRIV_KEY: 0203667637ec97bcb83efa336f7b3352afca52e67852cef432961cc7a699239c
+      MAX_PEERS: 5
+      HTTP_HOST: 0.0.0.0
+      HTTP_PORT: 8080
+      KNOWN_PEERS: "my-miner:9990"
+
+  miner-two:
+    image: jdforsythe/bloch:v0.1.0
+    ports:
+      - 8082:8080
+    depends_on:
+      - my-miner
+    networks:
+      - mining_network
+    environment:
+      P2P_PORT: 9990
+      MINER_PUB_KEY: 048b90cbd23d24c2d5ecb0df77bc9c9c8d79b46abcdc19cc026ba16372fd43bfecf3a48a54d23af12f102352984c8cbf668475bd3641cda096e982dcd54b023bfd
+      MINER_PRIV_KEY: a1b315e15251692e8a99193f288051ca3ef109de1d03c2737fde8d0e16081315
+      MAX_PEERS: 5
+      HTTP_HOST: 0.0.0.0
+      HTTP_PORT: 8080
+      KNOWN_PEERS: "my-miner:9990"
+
+networks:
+  mining_network:
+    driver: bridge

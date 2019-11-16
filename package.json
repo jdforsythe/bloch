@@ -1,0 +1,86 @@
+{
+  "name": "@jdforsythe/bloch",
+  "version": "0.1.0",
+  "description": "TypeScript Blockchain Implementation",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdforsythe/bloch.git"
+  },
+  "keywords": [
+    "module"
+  ],
+  "author": "Jeremy Forsythe <jdforsythe@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jdforsythe/bloch/issues"
+  },
+  "homepage": "https://github.com/jdforsythe/bloch#readme",
+  "scripts": {
+    "build": "yarn install && yarn run tslint && yarn run test && yarn run check-deps && yarn run clean && yarn run raw-build",
+    "build-docker-image": "docker build -t jdforsythe/bloch:latest .",
+    "check-deps": "yarn audit --groups dependencies",
+    "clean": "shx rm -rf lib",
+    "gen-key-pair": "node scripts/generate-key-pair.js",
+    "raw-build": "tsc",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "test": "nyc mocha --opts mocha.opts",
+    "test-watch": "testdeck-watch -p tsconfig.json -o mocha.opts"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.spec.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json-summary",
+      "text-summary",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
+  "dependencies": {
+    "@koa/router": "8.0.2",
+    "co-body": "6.0.0",
+    "crypto-js": "3.1.9-1",
+    "dotenv": "8.2.0",
+    "elliptic": "6.5.1",
+    "koa": "2.11.0",
+    "uuid": "3.3.3",
+    "ws": "7.2.0"
+  },
+  "devDependencies": {
+    "@testdeck/mocha": "^0.0.6",
+    "@types/chai": "^4.2.5",
+    "@types/co-body": "^0.0.3",
+    "@types/crypto-js": "^3.1.43",
+    "@types/dotenv": "^8.2.0",
+    "@types/elliptic": "^6.4.10",
+    "@types/koa__router": "^8.0.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.7",
+    "@types/uuid": "^3.4.6",
+    "@types/ws": "^6.0.3",
+    "chai": "^4.2.0",
+    "make-coverage-badge": "^1.2.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
+    "shx": "0.3.2",
+    "source-map-support": "^0.5.16",
+    "ts-node": "^8.5.0",
+    "tslint": "5.20.1",
+    "tslint-config-airbnb": "^5.11.2",
+    "typescript": "~3.7.2"
+  }
+}

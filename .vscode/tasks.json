@@ -1,0 +1,85 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Lint Typescript",
+      "type": "npm",
+      "script": "tslint",
+      "problemMatcher": {
+        "base": "$tslint5",
+        "fileLocation": "absolute"
+      }
+    },
+    {
+      "label": "Build",
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": [
+        "$tsc",
+        "$tslint5"
+      ]
+    },
+    {
+      "label": "Execute tests",
+      "type": "npm",
+      "script": "test",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": {
+        "owner": "mocha",
+        "fileLocation": [
+          "relative",
+          "${workspaceRoot}"
+        ],
+        "pattern": [
+          {
+            "regexp": "^not\\sok\\s\\d+\\s(.*)$"
+          },
+          {
+            "regexp": "\\s+(.*)$",
+            "message": 1
+          },
+          {
+            "regexp": "\\s+at\\s(.*)\\s\\((.*):(\\d+):(\\d+)\\)",
+            "file": 2,
+            "line": 3,
+            "column": 4
+          }
+        ]
+      }
+    },
+    {
+      "label": "Watch Tests",
+      "type": "npm",
+      "script": "test-watch",
+      "problemMatcher": [
+        "$tsc-watch",
+        {
+          "owner": "mocha",
+          "fileLocation": [
+            "relative",
+            "${workspaceRoot}"
+          ],
+          "pattern": [
+            {
+              "regexp": "^not\\sok\\s\\d+\\s(.*)$"
+            },
+            {
+              "regexp": "\\s+(.*)$",
+              "message": 1
+            },
+            {
+              "regexp": "\\s+at\\s(.*)\\s\\((.*):(\\d+):(\\d+)\\)",
+              "file": 2,
+              "line": 3,
+              "column": 4
+            }
+          ]
+        }
+      ],
+      "isBackground": true
+    }
+  ]
+}

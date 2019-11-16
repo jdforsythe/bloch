@@ -1,0 +1,27 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Built TS files
+**/dist/**/*
+
+# Dependencies
+**/node_modules
+
+# Log Files
+*.log
+
+# Cache
+.ts-node
+
+# Dev typings
+/typings.json
+/typings/
+
+# Code Coverage
+.nyc_output
+coverage/*
+!coverage/badge.svg
+
+# NPM config
+.npmrc

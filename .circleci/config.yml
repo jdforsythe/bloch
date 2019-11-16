@@ -1,0 +1,26 @@
+version: 2.1
+
+orbs:
+  docker-publish: circleci/docker-publish@0.1.6
+
+workflows:
+  build:
+    jobs:
+      - docker-publish/publish:
+          deploy: false
+          context: bloch
+          extra_build_args: --build-arg NPM_TOKEN=${NPM_TOKEN}
+
+  publish:
+    jobs:
+      - docker-publish/publish:
+          image: jdforsythe/bloch
+          tag: $CIRCLE_TAG
+          context: bloch
+          filters:
+            # publish on any version tag
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+            # ignore branch commits (they are build but not published)
+            branches:
+              ignore: /.*/
